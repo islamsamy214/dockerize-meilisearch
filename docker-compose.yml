@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.7
+    container_name: meilisearch
+    restart: always
+    networks:
+      - meilisearch-net
+    ports:
+      - "7700:7700"
+    environment:
+      MEILI_ENV: "development"
+      MEILI_MASTER_KEY: "YOU_KEY"
+    volumes:
+      - meilisearch_data:/data.ms
+
+  meilisearch-ui:
+    image: riccoxie/meilisearch-ui:latest
+    container_name: meilisearch-ui
+    restart: always
+    networks:
+      - meilisearch-net
+    ports:
+      - "8080:24900"
+    environment:
+      MEILISEARCH_URL: "http://meilisearch:7700"
+
+networks:
+  meilisearch-net:
+
+volumes:
+  meilisearch_data:
+
