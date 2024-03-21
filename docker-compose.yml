@@ -11,9 +11,9 @@ services:
       - "7700:7700"
     environment:
       MEILI_ENV: "development"
-      MEILI_MASTER_KEY: "YOU_KEY"
+      MEILI_MASTER_KEY: "your-key-is-here"
     volumes:
-      - meilisearch_data:/data.ms
+      - ./meili_data:/meili_data
 
   meilisearch-ui:
     image: riccoxie/meilisearch-ui:latest
@@ -28,7 +28,4 @@ services:
 
 networks:
   meilisearch-net:
-
-volumes:
-  meilisearch_data:
 
