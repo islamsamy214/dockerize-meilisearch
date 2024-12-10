@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
   meilisearch:
-    image: getmeili/meilisearch:v1.7
+    image: getmeili/meilisearch:v1.11
     container_name: meilisearch
-    restart: always
+    restart: unless-stopped
     networks:
       - meilisearch-net
     ports:
