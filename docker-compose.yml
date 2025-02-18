@@ -18,6 +18,7 @@ services:
             - 'meilisearch_data:/meili_data'
         networks:
           - microservices-network
+          - meilisearch-net
         healthcheck:
             test:
                 - CMD
@@ -27,10 +28,23 @@ services:
                 - 'http://127.0.0.1:7700/health'
             retries: 3
             timeout: 5s
+  meilisearch-ui:
+    image: riccoxie/meilisearch-ui:latest
+    container_name: meilisearch-ui
+    restart: always
+    networks:
+      - microservices-network
+      - meilisearch-net
+    ports:
+      - "24900:24900"
+    environment:
+      MEILISEARCH_URL: "http://meilisearch:7700"
 
 networks:
     microservices-network:
         external: true
+    meilisearch-net:
+        driver: bridge
 
 volumes:
     meilisearch_data:
